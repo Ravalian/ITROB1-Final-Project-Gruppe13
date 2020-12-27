@@ -3,7 +3,7 @@
 # generated from catkin/cmake/template/script.py.in
 # creates a relay to a python script source file, acting as that file.
 # The purpose is that of a symlink
-python_script = '/home/ros/Desktop/Robot_final_project/catkin_ws/src/quickui/scripts/quickui_example.py'
+python_script = '/home/ros/Desktop/ITROB1-Final-Project-Gruppe13/catkin_ws/src/quickui/scripts/quickui_example.py'
 with open(python_script, 'r') as fh:
     context = {
         '__builtins__': __builtins__,

@@ -1,2 +1,2 @@
-set(dynamixel_msgs_MESSAGE_FILES "/home/ros/Desktop/Robot_final_project/catkin_ws/src/dynamixel_motor/dynamixel_msgs/msg/JointState.msg;/home/ros/Desktop/Robot_final_project/catkin_ws/src/dynamixel_motor/dynamixel_msgs/msg/MotorState.msg;/home/ros/Desktop/Robot_final_project/catkin_ws/src/dynamixel_motor/dynamixel_msgs/msg/MotorStateList.msg")
+set(dynamixel_msgs_MESSAGE_FILES "/home/ros/Desktop/ITROB1-Final-Project-Gruppe13/catkin_ws/src/dynamixel_motor/dynamixel_msgs/msg/JointState.msg;/home/ros/Desktop/ITROB1-Final-Project-Gruppe13/catkin_ws/src/dynamixel_motor/dynamixel_msgs/msg/MotorState.msg;/home/ros/Desktop/ITROB1-Final-Project-Gruppe13/catkin_ws/src/dynamixel_motor/dynamixel_msgs/msg/MotorStateList.msg")
 set(dynamixel_msgs_SERVICE_FILES "")
