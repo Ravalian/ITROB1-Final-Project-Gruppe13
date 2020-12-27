@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ros/Desktop/Robot_final_project/catkin_ws/devel/setup.sh
