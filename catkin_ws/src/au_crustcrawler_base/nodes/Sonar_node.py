@@ -24,5 +24,5 @@ if __name__ == '__main__':
     rospy.Subscriber('base_scan', LaserScan, sonarcallback)
 
 
-    pub = rospy.Publisher('cmd_vel', Twist)
+    pub = rospy.Publisher('sonar_data', Twist)
     rospy.spin() #spin() simply keeps python from exiting until this node is closed

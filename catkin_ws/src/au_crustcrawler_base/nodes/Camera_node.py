@@ -1,4 +1,4 @@
-#! /usr/bin/env python 3
+#! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """
@@ -26,7 +26,7 @@ def findimagecoord():
     exr = 2*red - blue - green
 
     #Find suitable threshold
-    thresholded = 
+    thresholded = 0.6
 
     #show the areas
     cv2.imshow('exr', thresholded)
@@ -65,6 +65,6 @@ if __name__ == '__main__':
     #rospy.Subcriber('camera_scan', camera_data, cameracallback)
 
     #Publisher - Sending out the processed camera data
-    pub = rospy.Publisher('camera_data', )
+    pub = rospy.Publisher('camera_data', int)
 
     rospy.spin()
