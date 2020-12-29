@@ -10,11 +10,12 @@ import cv2
 import time
 import rospy
 import numpy as np
-from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import Float64MultiArray, Float64
+from sensor_msgs.msg import Image
 
 def findimagecoord():
     #read image
-    frame = cv2.imread('/home/ros/Desktop/ITROB1-Final-Project-Gruppe13/billede.png')
+    frame = cv2.imread('/home/ros/ITROB1-Final-Project-Gruppe13/billede.png')
 
     #show image on screen
     #cv2.imshow('frame', frame)
@@ -78,9 +79,9 @@ def findimagecoord():
     
     #cv2.putText(frame, str(cx) + ',' + str(cy), (cx,cy), font, 1, (255,0,0),2)
 
-    cv2.imshow('frame annotated', frame)
+    #cv2.imshow('frame annotated', frame)
 
-    cv2.waitKey(0)
+    #cv2.waitKey(0)
 
     data_to_send = Float64MultiArray()
     data_to_send.data = [cx,cy]
@@ -90,7 +91,7 @@ def findimagecoord():
 
 def cameracallback(image):
     objectcoords = findimagecoord()
-    print(objectcoords)
+    #print(objectcoords)
 
     #Sending out the processed cameradata (x, y) coords
     pub.publish(objectcoords)
@@ -100,9 +101,10 @@ if __name__ == '__main__':
     rospy.init_node('Camera_node')
 
     #Subscriber - receiving camera data - how to implement? 
-    #rospy.Subcriber('camera_scan', camera_data, cameracallback)
+    #rospy.Subcriber('camera_scan', Image, cameracallback)
+    rospy.Subscriber('base_scan', Float64, cameracallback)
 
     #Publisher - Sending out the processed camera data
-    pub = rospy.Publisher('camera_data', Float64MultiArray, queue_size=10)
+    pub = rospy.Publisher('camera_data', Float64MultiArray, queue_size=1)
 
     rospy.spin()

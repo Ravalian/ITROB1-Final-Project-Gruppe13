@@ -30,5 +30,5 @@ if __name__ == '__main__':
     rospy.Subscriber('base_scan', Float64, sonarcallback)
 
 
-    pub = rospy.Publisher('sonar_data', Float64,  queue_size=10)
+    pub = rospy.Publisher('sonar_data', Float64,  queue_size=1)
     rospy.spin() #spin() simply keeps python from exiting until this node is closed

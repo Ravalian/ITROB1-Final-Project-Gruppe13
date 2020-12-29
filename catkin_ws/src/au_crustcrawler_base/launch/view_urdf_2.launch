@@ -27,11 +27,11 @@
 	</node>
 	
 	<!-- Start a fake robot which publishes joint position based on input from a gui -->
-	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" if="$(arg simulate)">
+	<!--node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" if="$(arg simulate)">
 		type="joint_state_publisher">
 		<param name="use_gui" value="true" />
 		<remap from="joint_states" to="/joint_states" />
-	</node>
+	</node-->
 
 	<!-- Start Rviz for viewing the urdf -->
 	<node pkg="rviz" name="rvizz" type="rviz" args="-d $(find au_crustcrawler_base)/conf/view_urdf.rviz" />
