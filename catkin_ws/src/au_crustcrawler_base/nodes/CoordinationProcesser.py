@@ -40,6 +40,8 @@ class cp:
         y_c = xyz[1]
         z_c = xyz[2]
 
+        print(y_c)
+
         #Calculate q1
         q1 = math.atan2(y_c, x_c)
 
@@ -51,13 +53,13 @@ class cp:
         D = (r2 + math.pow(s,2) - math.pow(a2, 2) - math.pow(d4,2))/(2*a2*d4)
 
         #calculate q3
-        q3 = math.atan2((-math.sqrt(1-math.pow(D,2))),D)
+        q3 = math.atan2((math.sqrt(1-math.pow(D,2))),D)
 
         #calculateq2
         q2 = math.atan2(s, math.sqrt(r2)) - math.atan2(d4*math.sin(q3), a2+d4*math.cos(q3))
 
         #calculate q4
-        q4 = 0.0
+        q4 = 0.3
 
         js = JointState()
         js.header.stamp = rospy.Time.now()
@@ -85,8 +87,17 @@ class cp:
         self.pub.publish(q)
 
     def cameracallback(self, camera_data):
-        self.x = camera_data.data[0]/200
-        self.y = camera_data.data[1]/200
+        x_c = camera_data.data[0]
+        y_c = camera_data.data[1]
+
+        robot_orego = [320, 480]
+
+        dist_x = robot_orego[0]-x_c #165
+        dist_y = robot_orego[1]-y_c #174
+
+        pix_to_m = 0.00353/112 
+        self.x = dist_x*pix_to_m
+        self.y = dist_y*pix_to_m
 
 
         coordinates = self.invkin([self.x,self.y,self.z])

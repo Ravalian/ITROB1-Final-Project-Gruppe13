@@ -13,7 +13,7 @@
 		<remap from="camera_data" to="/camera_data"/>
 	</node>
 
-	<node pkg="au_crustcrawler_base" type="CoordinationProcesser.py" name="CoordinationProcesser_node">
+	<node pkg="au_crustcrawler_base" type="CoordinationProcesser.py" name="CoordinationProcesser_node" output="screen">
 		<remap from="camera_data" to="/camera_data"/>
 		<remap from="sonar_data" to="/sonar_data"/>
 		<remap from="processed_data" to="/processed_data"/>
