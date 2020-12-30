@@ -31,14 +31,14 @@ class cp:
         self.pub = rospy.Publisher('joint_states', JointState,  queue_size=1)
         
     def invkin(self, xyz):
-        d1 = 8.0 #H paa led 2 (cm)
+        d1 = 8 #H paa led 2 (cm)
         a1 = 0.0 #Distance langs y til led 2 (cm)
-        a2 = 17.0 #Distance mellem led 2 og led 3(cm)
-        d4 = 17.0 #Distance mellem led 3 og gribecenter (cm)
+        a2 = 17 #Distance mellem led 2 og led 3(cm)
+        d4 = 17 #Distance mellem led 3 og gribecenter (cm)
 
         x_c = xyz[0]
         y_c = xyz[1]
-        z_c = xyz[2]
+        z_c = 0.5-xyz[2]
         # x_c=0
         # y_c=0
         # z_c= 0
@@ -54,6 +54,7 @@ class cp:
 
         #calculate D
         D = (r2 + math.pow(s,2) - math.pow(a2, 2) - math.pow(d4,2))/(2*a2*d4)
+        print(D)
 
         #calculate q3
         q3 = math.atan2((-math.sqrt(1-math.pow(D,2))),D)
@@ -73,7 +74,7 @@ class cp:
         js.position.append(q2)
         js.velocity.append(0.0)
         js.name.append("joint3")
-        js.position.append(q3+1)
+        js.position.append(q3)
         js.velocity.append(0.0)
         js.name.append("joint4")
         js.position.append(q4)
