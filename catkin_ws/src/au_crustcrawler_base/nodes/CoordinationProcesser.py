@@ -31,16 +31,19 @@ class cp:
         self.pub = rospy.Publisher('joint_states', JointState,  queue_size=1)
         
     def invkin(self, xyz):
-        d1 = 10.0
-        a1 = 0.0
-        a2 = 20.0
-        d4 = 20.0
+        d1 = 8.0 #H paa led 2 (cm)
+        a1 = 0.0 #Distance langs y til led 2 (cm)
+        a2 = 17.0 #Distance mellem led 2 og led 3(cm)
+        d4 = 17.0 #Distance mellem led 3 og gribecenter (cm)
 
         x_c = xyz[0]
         y_c = xyz[1]
         z_c = xyz[2]
+        # x_c=0
+        # y_c=0
+        # z_c= 0
 
-        print(y_c)
+        print("x=",x_c,"y=",y_c,"z=",z_c)
 
         #Calculate q1
         q1 = math.atan2(y_c, x_c)
@@ -53,13 +56,13 @@ class cp:
         D = (r2 + math.pow(s,2) - math.pow(a2, 2) - math.pow(d4,2))/(2*a2*d4)
 
         #calculate q3
-        q3 = math.atan2((math.sqrt(1-math.pow(D,2))),D)
+        q3 = math.atan2((-math.sqrt(1-math.pow(D,2))),D)
 
         #calculateq2
         q2 = math.atan2(s, math.sqrt(r2)) - math.atan2(d4*math.sin(q3), a2+d4*math.cos(q3))
 
         #calculate q4
-        q4 = 0.3
+        q4 = 0
 
         js = JointState()
         js.header.stamp = rospy.Time.now()
@@ -70,7 +73,7 @@ class cp:
         js.position.append(q2)
         js.velocity.append(0.0)
         js.name.append("joint3")
-        js.position.append(q3)
+        js.position.append(q3+1)
         js.velocity.append(0.0)
         js.name.append("joint4")
         js.position.append(q4)
@@ -96,8 +99,8 @@ class cp:
         dist_y = robot_orego[1]-y_c #174
 
         pix_to_m = 0.00353/112 
-        self.x = dist_x*pix_to_m
-        self.y = dist_y*pix_to_m
+        self.x = dist_x*pix_to_m*100
+        self.y = dist_y*pix_to_m*100
 
 
         coordinates = self.invkin([self.x,self.y,self.z])
