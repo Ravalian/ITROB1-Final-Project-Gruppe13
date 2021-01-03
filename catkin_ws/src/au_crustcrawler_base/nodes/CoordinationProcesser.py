@@ -36,9 +36,9 @@ class cp:
         a2 = 0.17 #Distance mellem led 2 og led 3(cm)
         d4 = 0.17 #Distance mellem led 3 og gribecenter (cm)
 
-        x_c = xyz[0]
-        y_c = xyz[2]
-        z_c = xyz[1]
+        x_c = xyz[0]*2
+        y_c = xyz[1]
+        z_c = xyz[2]*2
         # x_c=0
         # y_c=0
         # z_c= 0
@@ -57,7 +57,7 @@ class cp:
         print(D)
 
         #calculate q3
-        q3 = math.atan2((math.sqrt(1-math.pow(D,2))),D)
+        q3 = math.atan2((-math.sqrt(1-math.pow(D,2))),D)
 
         #calculateq2
         q2 = math.atan2(s, math.sqrt(r2)) - math.atan2(d4*math.sin(q3), a2+d4*math.cos(q3))
@@ -83,7 +83,7 @@ class cp:
         return js
 
     def sonarcallback(self, sensor_data):
-        self.z = sensor_data.data
+        self.y = sensor_data.data
 
         q = self.invkin([self.x,self.y,self.z])
 
@@ -92,16 +92,16 @@ class cp:
 
     def cameracallback(self, camera_data):
         x_c = camera_data.data[0]
-        y_c = camera_data.data[1]
+        z_c = camera_data.data[1]
 
         robot_orego = [320, 480]
 
         dist_x = robot_orego[0]-x_c #165
-        dist_y = robot_orego[1]-y_c #174
+        dist_z = robot_orego[1]-z_c #174
 
         pix_to_m = 0.00353/112 
         self.x = dist_x*pix_to_m
-        self.y = dist_y*pix_to_m
+        self.z = dist_z*pix_to_m
 
 
         coordinates = self.invkin([self.x,self.y,self.z])
