@@ -31,14 +31,14 @@ class cp:
         self.pub = rospy.Publisher('joint_states', JointState,  queue_size=1)
         
     def invkin(self, xyz):
-        d1 = 8 #H paa led 2 (cm)
+        d1 = 0.08 #H paa led 2 (cm)
         a1 = 0.0 #Distance langs y til led 2 (cm)
-        a2 = 17 #Distance mellem led 2 og led 3(cm)
-        d4 = 17 #Distance mellem led 3 og gribecenter (cm)
+        a2 = 0.17 #Distance mellem led 2 og led 3(cm)
+        d4 = 0.17 #Distance mellem led 3 og gribecenter (cm)
 
         x_c = xyz[0]
-        y_c = xyz[1]
-        z_c = 0.5-xyz[2]
+        y_c = xyz[2]
+        z_c = xyz[1]
         # x_c=0
         # y_c=0
         # z_c= 0
@@ -57,7 +57,7 @@ class cp:
         print(D)
 
         #calculate q3
-        q3 = math.atan2((-math.sqrt(1-math.pow(D,2))),D)
+        q3 = math.atan2((math.sqrt(1-math.pow(D,2))),D)
 
         #calculateq2
         q2 = math.atan2(s, math.sqrt(r2)) - math.atan2(d4*math.sin(q3), a2+d4*math.cos(q3))
@@ -100,8 +100,8 @@ class cp:
         dist_y = robot_orego[1]-y_c #174
 
         pix_to_m = 0.00353/112 
-        self.x = dist_x*pix_to_m*100
-        self.y = dist_y*pix_to_m*100
+        self.x = dist_x*pix_to_m
+        self.y = dist_y*pix_to_m
 
 
         coordinates = self.invkin([self.x,self.y,self.z])
